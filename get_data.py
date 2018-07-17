@@ -67,7 +67,7 @@ def stack_single_sequence(chunk,data_type,dataset,train):
     if data_type[0] == 0:
         for rgb in chunk:
             labels.append(rgb[2])
-            if train:
+            if (train == 'train'):
                 render_rgb = random_position(rgb[4], 3)
             else:
                 render_rgb = rgb[1]
