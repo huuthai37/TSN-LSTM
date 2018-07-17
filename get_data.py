@@ -140,9 +140,10 @@ def stack_seq_rgb(path_video,render_rgb,pre_random,dataset,train):
     wx = 340
 
     for i in render_rgb:
-        if (i == 0):
-            i = 1
-        i_index = 'frame' + str(i).zfill(6) + '.jpg'
+        if (train != 'train'):
+            i_index = 'frame' + str(i + 10).zfill(6) + '.jpg'
+        else:
+            i_index = 'frame' + str(i).zfill(6) + '.jpg'
         rgb = cv2.imread(data_folder_rgb + name_video + '/' + i_index)
         if rgb is None:
             print 'Not found: ' + data_folder_rgb + name_video + '/' + i_index
