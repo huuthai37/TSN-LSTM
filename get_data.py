@@ -140,6 +140,8 @@ def stack_seq_rgb(path_video,render_rgb,pre_random,dataset,train):
     wx = 340
 
     for i in render_rgb:
+        if (i == 0):
+            i == 1
         i_index = 'frame' + str(i).zfill(6) + '.jpg'
         rgb = cv2.imread(data_folder_rgb + name_video + '/' + i_index)
         if rgb is None:
@@ -203,7 +205,8 @@ def stack_seq_optical_flow(path_video,render_opt,data_type,pre_random,dataset,tr
 
     for k in range(len_render_opt):
         nstack = np.zeros((256,340,20))
-
+        if (render[k] == 0):
+            render[k] == 1
         for i in range(10):
             img_u = cv2.imread(u + str(render[k]/data_type + i).zfill(6) + '.jpg', 0)
             img_v = cv2.imread(v + str(render[k]/data_type + i).zfill(6) + '.jpg', 0) 
