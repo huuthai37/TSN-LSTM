@@ -141,6 +141,8 @@ def stack_seq_rgb(path_video,render_rgb,pre_random,dataset,train):
 
     for i in render_rgb:
         if (train != 'train'):
+            if (i == -10):
+                i = -9
             i_index = 'frame' + str(i + 10).zfill(6) + '.jpg'
         else:
             i_index = 'frame' + str(i).zfill(6) + '.jpg'
