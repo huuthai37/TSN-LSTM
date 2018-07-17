@@ -1,0 +1,11 @@
+basketball
+biking
+diving
+golf_swing
+horse_riding
+soccer_juggling
+swing
+tennis_swing
+trampoline_jumping
+volleyball_spiking
+walking
