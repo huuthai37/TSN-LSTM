@@ -10,7 +10,7 @@ parser.add_argument('-r', '--retrain', help='Number of old epochs when retrain',
 parser.add_argument('-cross', '--cross', help='Cross fold', default=1, type=int)
 parser.add_argument('-s', '--summary', help='Show model', default=0, type=int)
 parser.add_argument('-lr', '--lr', help='Learning rate', default=5e-3, type=float)
-parser.add_argument('-decay', '--decay', help='Decay', default=1e-6, type=float)
+parser.add_argument('-decay', '--decay', help='Decay', default=0.0, type=float)
 parser.add_argument('-fine', '--fine', help='Fine-tuning', default=1, type=int)
 parser.add_argument('-n', '--neural', help='LSTM neural', default=256, type=int)
 parser.add_argument('-t', '--temporal', help='Temporal rate', default=1, type=int)
@@ -23,18 +23,19 @@ import models
 from keras import optimizers
 
 process = args.process
+old_epochs = 0
 if process == 'train':
     train = True
     retrain = False
-    old_epochs = 0
+    
 elif process == 'retrain':
     train = True
     retrain = True
     old_epochs = args.retrain
+
 else:
     train = False
     retrain = False
-    old_epochs = 0
 
 batch_size = args.batch
 classes = args.classes
@@ -46,7 +47,7 @@ temp_rate = args.temporal
 seq_len = 3
 n_neurons = args.neural
 dropout = args.dropout
-pre_file = 'incept229_temporal{}_lstm{}'.format(temp_rate,n_neurons)
+pre_file = 'incept_temporal{}_{}'.format(temp_rate,n_neurons)
 
 if train & (not retrain):
     weights = 'imagenet'
