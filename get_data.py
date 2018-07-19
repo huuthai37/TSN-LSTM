@@ -285,9 +285,9 @@ def random_position(length, num_seq, rgb=True):
         if length > 60:
             for i in range(num_seq):
                 if i < num_seq - 1:
-                    k = np.random.randint(divide*i+1,divide*(i+1)-19)
+                    k = np.random.randint(divide*i+1,divide*(i+1)-18)
                 else:
-                    k = np.random.randint(divide*i+1,length-20)
+                    k = np.random.randint(divide*i+1,length-19)
                 train_render.append(k)
         else:
             if (length > 30):
