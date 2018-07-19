@@ -64,6 +64,7 @@ def InceptionTemporal(n_neurons=256, seq_len=3, classes=101, weights='imagenet',
     result_model.add(TimeDistributed(inception, input_shape=(seq_len, 299,299,20)))
     result_model.add(LSTM(n_neurons, return_sequences=True))
     result_model.add(Flatten())
+    result_model.add(Dense(512, activation='relu'))
     result_model.add(Dropout(dropout))
     result_model.add(Dense(classes, activation='softmax'))
 
