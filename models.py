@@ -41,6 +41,7 @@ def InceptionSpatial(n_neurons=256, seq_len=3, classes=101, weights='imagenet',
     result_model.add(LSTM(n_neurons, return_sequences=True))
     # result_model.add(AveragePooling1D(pool_size=seq_len))
     result_model.add(Flatten())
+    result_model.add(Dense(512, activation='relu'))
     result_model.add(Dropout(dropout))
     result_model.add(Dense(classes, activation='softmax'))
 
