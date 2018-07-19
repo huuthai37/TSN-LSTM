@@ -216,6 +216,8 @@ def stack_seq_optical_flow(path_video,render_opt,data_type,pre_random,dataset,tr
             if img_u is None:
                 print 'Not found:' + u + str(render[k]/data_type + i).zfill(6) + '.jpg'
                 sys.exit()
+            img_u = img_u[:,0:340]
+            img_v = img_v[:,0:340]
             nstack[:,:,2*i] = img_u
             nstack[:,:,2*i+1] = img_v
 
