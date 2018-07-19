@@ -45,7 +45,7 @@ dataset = args.dataset
 seq_len = 3
 n_neurons = args.neural
 dropout = args.dropout
-pre_file = 'inception_spatial_{}'.format(n_neurons)
+pre_file = 'inception_spatial2fc_{}'.format(n_neurons)
 
 if train & (not retrain):
     weights = 'imagenet'
