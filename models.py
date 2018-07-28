@@ -116,6 +116,11 @@ def InceptionMultistream(n_neurons=256, seq_len=3, classes=101, weights='imagene
 
     return result_model
 
+def foo(ip):
+    a = ip[0]
+    b = ip[1]
+    return (a + b*1.5)/2.5
+
 def InceptionMultistream2(n_neurons=256, seq_len=3, classes=101, weights='imagenet', 
     dropout=0.8, fine=True, retrain=False, pre_file='',old_epochs=0,cross_index=1, pre_train=None,temp_rate=1):
 
@@ -132,8 +137,8 @@ def InceptionMultistream2(n_neurons=256, seq_len=3, classes=101, weights='imagen
     if (weights == 'pretrain') & (not retrain):
         spatial.load_weights('weights/incept229_spatial_lstm{}_{}e_cr{}.h5'.format(n_neurons,pre_train[0],cross_index))
         print 'load spatial weights'
-    spatial.pop()
-    spatial.pop()
+#     spatial.pop()
+#     spatial.pop()
 
     temporal = InceptionTemporalLSTMConsensus(
                     n_neurons=n_neurons, seq_len=seq_len, classes=classes, 
@@ -144,15 +149,12 @@ def InceptionMultistream2(n_neurons=256, seq_len=3, classes=101, weights='imagen
         temporal.load_weights('weights/incept229_temporal{}_lstm{}_{}e_cr{}.h5'.format(temp_rate,n_neurons,pre_train[1],cross_index))
         print 'load temporal weights'
 
-    temporal.pop()
-    temporal.pop()
+#     temporal.pop()
+#     temporal.pop()
 
-    concat = Concatenate()([spatial.output, temporal.output])
-    concat = Dense(512, activation='relu')(concat)
-    concat = Dropout(dropout)(concat)
-    concat = Dense(classes, activation='softmax')(concat)
+    average = Lambda(foo)([spatial.output, temporal.output])
 
-    result_model = Model(inputs=[spatial.input, temporal.input], outputs=concat)
+    result_model = Model(inputs=[spatial.input, temporal.input], outputs=average)
 
     if retrain:
         result_model.load_weights('weights/{}_{}e_cr{}.h5'.format(pre_file,old_epochs,cross_index))
