@@ -129,7 +129,7 @@ def InceptionMultistream2(n_neurons=256, seq_len=3, classes=101, weights='imagen
     else:
         weight = weights
 
-    spatial = InceptionSpatialLSTMConsensus(
+    spatial = InceptionSpatial(
                     n_neurons=n_neurons, seq_len=seq_len, classes=classes, 
                     weights=weight, dropout=dropout, fine=fine, retrain=False,
                     pre_file=pre_file,old_epochs=old_epochs,cross_index=cross_index)
@@ -140,7 +140,7 @@ def InceptionMultistream2(n_neurons=256, seq_len=3, classes=101, weights='imagen
 #     spatial.pop()
 #     spatial.pop()
 
-    temporal = InceptionTemporalLSTMConsensus(
+    temporal = InceptionTemporal(
                     n_neurons=n_neurons, seq_len=seq_len, classes=classes, 
                     weights=weight, dropout=dropout, fine=fine, retrain=False,
                     pre_file=pre_file,old_epochs=old_epochs,cross_index=cross_index)
