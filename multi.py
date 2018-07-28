@@ -60,7 +60,7 @@ if args.fine == 1:
 else:
     fine = False
 
-result_model = models.InceptionMultiLSTMConsensus2(
+result_model = models.InceptionMultistream2(
                     n_neurons=n_neurons, seq_len=seq_len, classes=classes, 
                     weights=weights, dropout=dropout, fine=fine, retrain=retrain,
                     pre_file=pre_file,old_epochs=old_epochs,cross_index=cross_index,
