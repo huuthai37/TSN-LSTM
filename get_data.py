@@ -109,13 +109,16 @@ def stack_multi_sequence(chunk,multi_data_type,dataset,train):
 
     labels = []
     stack_return_rgb = []
+    stack_return_opt = []
     for rgb in chunk:
         labels.append(rgb[2])
-        stack_return_rgb.append(stack_seq_rgb(rgb[0],rgb[1],pre_random,dataset,train))
-    
-    stack_return_opt = []
-    for opt in chunk:
-        stack_return_opt.append(stack_seq_optical_flow(opt[0],opt[1],multi_data_type[1],pre_random,dataset,train))
+        if (train == 'train'):
+            render_opt = random_position(rgb[4], 3, False)
+        else:
+            render_opt = rgb[1]
+        render_rgb = np.array(render_opt) + 5
+        stack_return_rgb.append(stack_seq_rgb(rgb[0],render_rgb,pre_random,dataset,train))
+        stack_return_opt.append(stack_seq_optical_flow(rgb[0],render_opt,multi_data_type[1],pre_random,dataset,train))
 
     if len(stack_return_rgb) < len(chunk):
         print 'Stacked data error'
